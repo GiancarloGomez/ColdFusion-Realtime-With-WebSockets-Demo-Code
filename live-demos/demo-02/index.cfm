@@ -17,6 +17,7 @@
 
 	<cfwebsocket name="ws"
 				 onmessage="parseMessage"
-				 subscribeto="demo" />
+				 subscribeto="demo"
+				 secure="true" />
 </body>
 </html>
