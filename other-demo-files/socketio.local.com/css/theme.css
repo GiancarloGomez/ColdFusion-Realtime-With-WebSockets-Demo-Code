@@ -1,0 +1,26 @@
+body, table {font-family:Lato,"Helvetica Neue",Helvetica,Arial,sans-serif !important;}
+textarea {resize:none;}
+
+/* Containers */
+#timestamp{display: block; font-size:.6em; margin:.3em 0;}
+#live-stats{
+	transition:all .5s;
+	opacity: 1;
+}
+#live-stats.off{
+	opacity: 0;
+}
+
+/* Classes */
+.large-data {
+	font-size:6em;
+	font-weight:700;
+}
+.top-20{margin-top:20px;}
+
+/* cfdump rules */
+table.cfdump_wddx, table.cfdump_xml, table.cfdump_struct, table.cfdump_varundefined,
+table.cfdump_array, table.cfdump_query, table.cfdump_cfc, table.cfdump_object,
+table.cfdump_binary, table.cfdump_udf, table.cfdump_udfbody, table.cfdump_udfarguments{
+	font-size:12px !important;
+}

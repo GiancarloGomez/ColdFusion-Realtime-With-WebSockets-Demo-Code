@@ -1,0 +1,138 @@
+body, table {font-family:Lato,"Helvetica Neue",Helvetica,Arial,sans-serif !important;}
+textarea {resize:none;}
+
+/* Containers */
+#timestamp{display: block; font-size:.6em; margin:.3em 0;}
+#live-stats{
+	transition:all .5s;
+	opacity: 1;
+}
+#live-stats.off{
+	opacity: 0;
+}
+
+/* Classes */
+.large-data {
+	font-size:6em;
+	font-weight:700;
+}
+.top-20{margin-top:20px;}
+
+/* cfdump rules */
+table.cfdump_wddx, table.cfdump_xml, table.cfdump_struct, table.cfdump_varundefined,
+table.cfdump_array, table.cfdump_query, table.cfdump_cfc, table.cfdump_object,
+table.cfdump_binary, table.cfdump_udf, table.cfdump_udfbody, table.cfdump_udfarguments{
+	font-size:12px !important;
+}
+
+body{
+	padding-top:51px;
+}
+pre{
+	font: normal 14px/1.4em 'source code pro',consolas,monospace;
+	border-radius: 0;
+	margin:0;
+}
+.list-unstyled li{
+	padding:.5em;
+	background:#eee;
+	margin:1px 0;
+	position: relative;
+}
+#status-message{
+	margin:0;
+	border-radius: 0;
+	border-width: 1px 0 0 0;
+}
+.timestamp{
+	position: absolute;
+	right:1em;
+	top:1em;
+	font-size: 1.2em;
+	font-weight: 600;
+	color: #888;
+}
+.navbar-header {
+	float: left !important;
+}
+.navbar-nav{
+	margin: 0 !important;
+}
+.navbar-nav>li>a{
+	padding-top: 15px;
+	padding-bottom: 15px;
+	line-height: 20px;
+}
+
+#chat-message-form{
+	bottom: 52px;
+	padding:10px;
+}
+#console,
+#users{
+	position: absolute;
+	top:51px;
+	bottom:107px;
+	right: 0;
+	left: 200px;
+	margin: 0;
+	overflow-y:scroll;
+}
+#users{
+	left:0;
+	right: auto;
+	width:200px;
+	background:#aaa;
+}
+#users ul{
+	margin:1em;
+	padding-left: 1em;
+}
+#users ul small{
+	display: block;
+	color: #555;
+}
+.navbar,
+#console,
+#users{
+	opacity: 1;
+	transition:all .5s;
+}
+.off .navbar,
+.off #console,
+.off #users{
+	opacity: .1;
+}
+.message{
+	background-color:#eee;
+	margin:3px;
+	border-radius: .4em;
+	border:1px solid #ddd;
+	overflow: hidden;
+}
+.message .sender{
+	background-color: rgba(255,255,255,.7);
+	padding: .3em;
+	color:#888;
+	font-size:.9em;
+}
+.message .content{
+	padding: .3em;
+}
+.message.me{
+	background-color: #b5d5f8;
+	border-color: #a6c4e4;
+
+}
+.message.me .sender{
+	color: #7C8DA5;
+}
+.message.system{
+	background-color: #deefd8;
+	border-color: #d6e7c6;
+}
+.message.clear{
+	background-color: transparent;
+	border-color: transparent;
+	box-sizing: border-box;
+}
