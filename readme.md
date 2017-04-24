@@ -1,4 +1,4 @@
-#Realtime with WebSockets - Demo Code
+# Realtime with WebSockets - Demo Code
 __Presented By [Giancarlo Gomez](https://github.com/GiancarloGomez)__
 
 This is the demo code used in my latest Realtime with WebSockets presentation.
@@ -8,6 +8,7 @@ This is the demo code used in my latest Realtime with WebSockets presentation.
 	<li>NCDevCon 2016</li>
 	<li>CFSummit 2016</li>
 </ul>
+
 * __chat__<br />_The chat demo_
 * __live-demos__
 	* __demo-01__<br />_Minimal requirements_
