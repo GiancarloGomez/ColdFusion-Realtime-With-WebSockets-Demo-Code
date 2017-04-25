@@ -7,10 +7,10 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700">
-	<link rel="stylesheet" href="chat.css">
+	<link rel="stylesheet" href="../assets/css/chat.css">
 </head>
 <body 	data-channels="chat"
-		data-debug="true"
+		data-debug="false"
 		data-auto-connect="false"
 		data-online-timer="10"
 		data-ping-url="ping.cfm"
@@ -78,8 +78,8 @@
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-	<script src="../../AdvancedSocket/src/advancedsocket.js"></script>
-	<script src="chat.js"></script>
+	<script src="../assets/js/advancedsocket.js"></script>
+	<script src="../assets/js/chat.js"></script>
 
 	<cfwebsocket 	name		= "ws"
 					onMessage	= "AdvancedSocket.onMessage"

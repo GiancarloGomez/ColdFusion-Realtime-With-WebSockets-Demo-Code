@@ -55,7 +55,7 @@ component {
 									"</div></div>";
 		}
 		else {
-			local.messageText = "<div class='message system'><div class='content'>" & arguments.message.message & '</content></div>';
+			local.messageText = "<div class='message system'><div class='sender'>SYSTEM</div><div class='content'>" & arguments.message.message & '</content></div>';
 		}
 		return local.messageText;
 	}

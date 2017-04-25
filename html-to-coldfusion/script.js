@@ -11,20 +11,18 @@
 * This sample assumes you already ran the demo-01 application and that you are using the internal websocket
 * server on port 8577 (this is the type of work that the CF's team's code already handles for you along with Flash fallback)
 */
-var ws          = new WebSocket('ws://' + location.hostname + ':8577/cfusion/cfusion'),
+var protocol    = location.protocol === 'https:' ? 'wss' : 'ws',
+    port        = location.protocol === 'https:' ? 8543 : 8577,
+    ws          = new WebSocket(`${protocol}://${location.hostname}:${port}/cfusion/cfusion`),
     subscribe   = {ns: 'coldfusion.websocket.channels', type: 'subscribe', channel: 'demo', appName: 'websockets_demo1'},
     unsubscribe = {ns: 'coldfusion.websocket.channels', type: 'unsubscribe', channel: 'demo', appName: 'websockets_demo1'},
-    message     = {ns: 'coldfusion.websocket.channels', type: 'publish', channel: 'demo', data:'', appName: 'websockets_demo1'},
-    openMessage = document.getElementById('domessage'),
-    sendMessage = document.getElementById('sendmessage'),
-    messageForm = document.getElementById('message'),
-    messageText = document.getElementById('messagetext');
+    message     = {ns: 'coldfusion.websocket.channels', type: 'publish', channel: 'demo', data:'', appName: 'websockets_demo1'};
 
 
 // WebSocket API Events
 
 ws.onopen = function(e){
-    console.log('onopen',e);
+    // console.log('onopen',e);
     // when we open go ahead and connect
     subscribeMe();
     // lets show our buttons
@@ -36,25 +34,17 @@ ws.onopen = function(e){
 
 ws.onmessage = function(e){
     // when we receive a message pass it to the parseMessage function (the data piece of the object received)
-    console.log('onmessage',e);
+    // console.log('onmessage',e);
     parseMessage(JSON.parse(e.data));
 };
 
 ws.onerror = function(e){
-    console.log('onerror',e);
+    // console.log('onerror',e);
 };
 
 ws.onclose = function(e){
-    console.log('close',e);
+    // console.log('close',e);
 };
-
-// Event Listeners on Buttons and Textarea
-openMessage.addEventListener('click',doToggleMessageForm);
-sendMessage.addEventListener('click',doSendMessage);
-messageText.addEventListener('keyup',function(event){
-    if(event.keyCode === 13  && event.shiftKey === true)
-        doSendMessage();
-});
 
 // Subscribe me to a channel
 function subscribeMe(){
@@ -68,18 +58,12 @@ function unsubscribeMe(){
         ws.send(JSON.stringify(unsubscribe));
 }
 
-// Toggle our message modal
-function doToggleMessageForm(){
-    if ( messageForm.classList.contains('hide') === true){
-        messageForm.classList.remove('hide');
-        messageForm.message.value = '';
-    } else {
-        messageForm.classList.add('hide');
-    }
-}
-
+// Remove listner set in scripts.js and attach to new function here
+// as working with ws object is different
+sendMessage.removeEventListener('click',doSendMessage);
+sendMessage.addEventListener('click',_doSendMessage);
 // Send a message to the server => publish()
-function doSendMessage(){
+function _doSendMessage(){
     var thisMessage = Object.assign({},message),
         theMessage  = messageText.value.trim();
     if (theMessage !== ''){

@@ -1,0 +1,19 @@
+#status {
+	color:#fff;
+	left:50%;
+	line-height: 50px;
+	min-width: 200px;
+	opacity: 0;
+	padding: 0 1em;
+	position: absolute;
+	text-align: center;
+	text-transform: uppercase;
+	top:0;
+	transform: translateX(-50%);
+	transition: opacity .25s;
+	z-index: 100;
+}
+#status.on {opacity:1;}
+#status.connected {background-color: rgba(0,255,0,.5);}
+#status.disconnected {background-color: rgba(255,0,0,.5);}
+#status.connecting {background-color: rgba(0,0,255,.5);}
