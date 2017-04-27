@@ -1,4 +1,4 @@
-component output="false"{
+component {
 
     this.name              = "webSocketsChat";
     this.sessionmanagement = true;
@@ -38,5 +38,4 @@ component output="false"{
         }
         return authenticated;
     }
-
 }
