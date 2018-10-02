@@ -3,10 +3,10 @@ body {
 	padding: 51px 0 0;
 }
 body, button, textarea {
-	font: 400 14px/1.4em Lato,"Helvetica Nueu", Arial, sans-serif;
+	font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 pre{
-	font: 400 14px/1.4em 'Operator Mono Ssm','source code pro',consolas,monospace;
+	font: 400 14px/1.4em 'Operator Mono Ssm', Menlo, Consolas, monospace;
 	border-radius: 0;
 	background-color: transparent;
 	margin:0;
@@ -18,7 +18,7 @@ pre{
 * {
 	box-sizing: border-box;
 }
-nav {
+nav:not(.navbar) {
 	background-color: #f8f8f8;
 	border-bottom:1px solid #e7e7e7;
 	padding:0 15px;
@@ -28,8 +28,8 @@ nav {
 	text-align: right;
 	z-index: 1;
 }
-nav span,
-button {
+nav:not(.navbar) span,
+nav:not(.navbar) button:not(.btn) {
 	background-color:transparent;
 	border: none;
 	color: #777;
@@ -38,11 +38,17 @@ button {
 	outline: none;
 	padding:0 15px;
 }
-nav span {
+.container-fluid button:not(.btn){
+	border-left:1px solid #ddd;
+}
+nav:not(.navbar) span {
 	display: inline-block;
 	float: left;
 	padding: 0;
 	font-size: 1.2em;
+}
+nav.navbar{
+	margin-bottom: 20px;
 }
 .hide{
 	display: none;

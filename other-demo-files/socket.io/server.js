@@ -5,7 +5,9 @@ var app         = require('express')(),
     url         = require('url');
 
 // listen on custom port
-server.listen(8080);
+server.listen(8080, function(){
+  console.log('listening on *:8080');
+});
 
 // The Simple WebSocket Server
 io.on('connection', function (socket) {
@@ -44,6 +46,11 @@ io.on('connection', function (socket) {
 * or an empty object ({}) if there was no body to parse (or an error was returned).
 */
 app.use(bodyParser.urlencoded({extended:true}));
+
+// HOME PAGE
+app.get('/', function(req, res){
+  res.send('<h1>Hello world</h1>');
+});
 
 // POST MESSAGE
 // Easy way to post a message so connected clients can receive from external services

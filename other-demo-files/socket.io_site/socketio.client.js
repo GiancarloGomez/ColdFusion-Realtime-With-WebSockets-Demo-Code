@@ -1,8 +1,9 @@
-var channels    =   ['demo','global'],
-    socket      =   {},
-    ws          =   {CONNECTED:0,NOTIFY:0},
-    _console    =   document.getElementById('console'),
-    _clearlog   =   document.getElementById('clearlog'),
+var channels    = ['demo','global'],
+    socket      = {},
+    server      = {},
+    ws          = {CONNECTED:0,NOTIFY:0},
+    _console    = document.getElementById('console'),
+    _clearlog   = document.getElementById('clearlog'),
     _scroll     = navigator.userAgent.indexOf('Firefox') !== -1,
     // message controls
     openMessage = document.getElementById('domessage'),
@@ -11,22 +12,34 @@ var channels    =   ['demo','global'],
     messageForm = document.getElementById('message'),
     messageText = document.getElementById('messagetext');
 
-
-// go an connect
-try{
-    socket = io('http://socketio.local.com:8080/',{
-        query : 'channels=' + channels.join(',')
+// let's fetch our info
+fetch('./info/',{type:'GET'})
+    .then( response => response.json() )
+    .then( response => {
+        if(!response.success)
+           window.alert(response.message);
+        else
+            callSocketIO(response.data.socketio_server,response.data.socketio_port);
     });
-}
-catch(e){
-    window.alert('We could not connect to the socket IO instance, make sure you have started it.');
-    socket = null;
+
+
+function callSocketIO(server,port){
+    // go an connect
+    try{
+        socket = io(`${server}:${port}/`,{
+            query : 'channels=' + channels.join(',')
+        });
+        setupSocketIO();
+    }
+    catch(e){
+        window.alert('We could not connect to the socket IO instance, make sure you have started it.');
+    }
 }
 
 /* ==========================================================================
 SOCKET EVENTS
 ========================================================================== */
-    if (socket){
+    function setupSocketIO(){
         socket.on('connect',function(){
             ws.CONNECTED = 1;
             parseMessage('connected to ' + channels.join(','));
@@ -91,10 +104,8 @@ GLOBAL LISTENERS AND FUNCTIONS
 
         // extra
         // if firefox use internal smooth functionality of scrollIntoView - if not animate using function
-        if (_scroll)
+        if (document.body.scrollIntoView)
             document.body.scrollIntoView({block: "end", behavior: "smooth"});
-        else if (_li.offsetTop + _li.offsetHeight > document.documentElement.clientHeight)
-            scrollTo(document.body, (_li.offsetTop + _li.offsetHeight + 11) - document.documentElement.clientHeight, 250);
     }
 
     // Event Listeners on Buttons and Textarea
@@ -123,31 +134,3 @@ GLOBAL LISTENERS AND FUNCTIONS
             doToggleMessageForm();
         }
     }
-
-// https://gist.github.com/andjosh/6764939
-    function scrollTo(element, to, duration) {
-        var start = element.scrollTop,
-            change = to - start,
-            currentTime = 0,
-            increment = 20;
-
-        var animateScroll = function(){
-            currentTime += increment;
-            var val = Math.easeInOutQuad(currentTime, start, change, duration);
-            element.scrollTop = val;
-            if(currentTime < duration) {
-                setTimeout(animateScroll, increment);
-            }
-        };
-        animateScroll();
-    }
-    //t = current time
-    //b = start value
-    //c = change in value
-    //d = duration
-    Math.easeInOutQuad = function (t, b, c, d) {
-      t /= d/2;
-        if (t < 1) return c/2*t*t + b;
-        t--;
-        return -c/2 * (t*(t-2) - 1) + b;
-    };

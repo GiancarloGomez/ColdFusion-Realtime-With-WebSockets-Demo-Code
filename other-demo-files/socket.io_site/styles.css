@@ -3,10 +3,10 @@ body {
 	padding: 51px 0 0;
 }
 body, button, textarea {
-	font: 400 14px/1.4em Lato,"Helvetica Nueu", Arial, sans-serif;
+	font: 400 14px/1.4em -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 pre{
-	font: 400 14px/1.4em 'Operator Mono Ssm','source code pro',consolas,monospace;
+	font: 400 14px/1.4em 'Operator Mono Ssm', Menlo, Consolas, monospace;
 	border-radius: 0;
 	background-color: transparent;
 	margin:0;

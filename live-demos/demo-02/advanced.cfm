@@ -21,9 +21,12 @@
 		<button type="button" id="clearlog">CLEAR LOG</button>
 	</nav>
 
-
-
 	<ul id="console"></ul>
+
+	<form id="message" class="hide">
+		<textarea name="message" id="messagetext"></textarea>
+		<button type="button" id="sendmessage">Send Message</button>
+	</form>
 
 	<script src="../../assets/js/advancedsocket.js"></script>
 	<script src="../../assets/js/script.js"></script>
@@ -33,7 +36,6 @@
 					onMessage="AdvancedSocket.onMessage"
 					onOpen="AdvancedSocket.onOpen"
 					onClose="AdvancedSocket.onClose"
-					onError="AdvancedSocket.onError"
-				 	secure="true" />
+					onError="AdvancedSocket.onError" />
 </body>
 </html>

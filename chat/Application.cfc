@@ -18,7 +18,7 @@ component {
 
     public boolean function onRequestStart(targetPage){
         if (structKeyExists(url,"reload")){
-            // tell everyone to reconnect
+            // tell everyone to reconnect ( AdvancedSocket Feature )
             WsPublish("chat","FORCE-RECONNECT");
             applicationStop();
             location('./',false);

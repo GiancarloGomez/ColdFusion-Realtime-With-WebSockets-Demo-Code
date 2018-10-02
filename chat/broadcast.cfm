@@ -15,7 +15,6 @@
 	cfthread(action:"run",name:threadName,message:msg){
 		WsPublish("chat",attributes.message);
 	}
-
 	// for notifications
 	writeOutput(msg);
 </cfscript>

@@ -11,11 +11,12 @@
 			msg = "We could not fetch a funny joke so this is just the server responding";
 		}
 	}
+	// remove HTML entities from string because it bombs out
+	msg = msg.replaceAll("\&[^\;]+\;","");msg = replace(msg,"&quot;","'","all");
 	// Specially helpful when using Frameworks or calling in the middle of an Ajax Request
 	cfthread(action:"run",name:threadName,message:msg){
 		WsPublish("demo",attributes.message);
 	}
-
 	// for notifications
 	writeOutput(msg);
 </cfscript>

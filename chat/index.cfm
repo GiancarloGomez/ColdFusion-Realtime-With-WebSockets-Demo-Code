@@ -6,7 +6,6 @@
 	<title>WebSocket Chat</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700">
 	<link rel="stylesheet" href="../assets/css/chat.css">
 </head>
 <body 	data-channels="chat"
@@ -85,7 +84,6 @@
 					onMessage	= "AdvancedSocket.onMessage"
 					onOpen		= "AdvancedSocket.onOpen"
 					onClose		= "AdvancedSocket.onClose"
-					onError		= "AdvancedSocket.onError"
-					secure 		= "#cgi.server_port_secure#">
+					onError		= "AdvancedSocket.onError">
 </body>
 </html>

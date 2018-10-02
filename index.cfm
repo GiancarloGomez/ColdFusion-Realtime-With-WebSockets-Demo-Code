@@ -1,66 +1,79 @@
+<cfscript>
+	if(!structKeyExists(request,"socketio_server"))
+		throw("You must set the full URL to the Socket.IO Console Site to request.socketio_server - review instructions in Application.onRequestStart()");
+	if(!structKeyExists(request,"socketio_broadcast"))
+		throw("You must set the full URL to the Socket.IO Broadcast Handler to request.socketio_broadcast - review instructions in Application.onRequestStart()");
+	links = [
+		{
+			title 		: "DEMO 1",
+			description : "SIMPLE",
+			nav 		: [
+				{link:"/live-demos/demo-01/",title:"Console"},
+				{link:"/live-demos/demo-01/broadcast/",title:"Broadcast",ajax:true},
+				{link:"/live-demos/demo-01/subscribers/",title:"Subscribers",modal:true}
+			]
+		},
+		{
+			title 		: "DEMO 2",
+			description : "ADVANCED",
+			nav 		: [
+				{link:"/live-demos/demo-02/",title:"Simple Console"},
+				{link:"/live-demos/demo-02/advanced/",title:"Advanced Console"},
+				{link:"/live-demos/demo-02/broadcast/",title:"Broadcast",ajax:true},
+				{link:"/live-demos/demo-02/subscribers/",title:"Subscribers",modal:true}
+			]
+		},
+		{
+			title 		: "CHAT",
+			description : "",
+			nav 		: [
+				{link:"/chat/",title:"Chat App"},
+				{link:"/chat/broadcast/",title:"Broadcast",ajax:true},
+				{link:"/chat/subscribers/",title:"Subscribers",modal:true}
+			]
+		},
+		{
+			title 		: "OTHER",
+			description : "",
+			nav 		: [
+				{link:"/html-to-coldfusion/",title:"HTML to ColdFusion"},
+				{link:request.socketio_server,title:"Socket.IO Console"},
+				{link:request.socketio_broadcast,title:"Socket.IO Broadcast",ajax:true}
+			]
+		}
+	];
+</cfscript>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-	<title>Realtime w/ WebsSockets</title>
+	<title>Realtime with WebsSockets</title>
 	<link rel="icon" href="./favicon.ico">
 	<link rel="author" href="./humans.txt" />
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 	<link rel="stylesheet" href="./assets/css/styles.css">
-	<style>body { padding:0; }</style>
+	<style>body { padding:1em; }</style>
 </head>
-<body data-debug="false">
-
-	<div class="container-fluid">
-		<div class="page-header">
-			<h1>Realtime with WebSockets - Demo Code</h1>
-		</div>
+<body>
+	<div class="container">
+		<h1 class="text-center">Realtime with WebSockets</h1>
 		<cfoutput>
-			<cfloop from="1" to="3" index="i">
-				<div class="navbar navbar-default">
-					<div class="container-fluid">
-						<div class="navbar-header">
-							<span class="navbar-brand">DEMO 0#i#</span>
-						</div>
-						<ul class="nav navbar-nav navbar-left">
-							<li><a href="/live-demos/demo-0#i#/subscribers.cfm" data-modal="true" data-channel="DEMO 0#i#">SUBSCRIBERS</a></li>
-							<li><a href="/live-demos/demo-0#i#/broadcast.cfm" data-ajax="true" data-channel="DEMO 0#i#">BROADCAST</a></li>
-							<li><a href="/live-demos/demo-0#i#/" target="blank">CONSOLE</a></li>
-							<cfif !compare(i,3)>
-								<li><a href="/live-demos/demo-0#i#/advanced.cfm" target="blank">ADVANCED CONSOLE</a></li>
-							</cfif>
+			<cfloop array="#links#" item="link" index="i">
+				<nav class="navbar navbar-light bg-light navbar-expand-md">
+					<a class="navbar-brand" href="##">#link.title# <small class="text-info">#link.description#</small></a>
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="##demo_controls_#i#" aria-controls="##demo_controls_#i#" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					<div class="collapse navbar-collapse" id="demo_controls_#i#">
+						<ul class="navbar-nav ml-auto">
+							<cfloop array="#link.nav#" item="nav">
+								<li class="nav-item"><a href="#nav.link#" class="nav-link" target="blank" data-channel="#link.title#" #(nav.ajax ?: false) ? 'data-ajax="true"' : ''# #(nav.modal ?: false) ? 'data-modal="true"' : ''#>#nav.title#</a></li>
+							</cfloop>
 						</ul>
 					</div>
-				</div>
+				</nav>
 			</cfloop>
-			<div class="navbar navbar-default">
-				<div class="container-fluid">
-					<div class="navbar-header">
-						<span class="navbar-brand">CHAT</span>
-					</div>
-					<ul class="nav navbar-nav navbar-left">
-						<li><a href="/chat/subscribers.cfm" data-modal="true" data-channel="DEMO 0#i#">SUBSCRIBERS</a></li>
-						<li><a href="/chat/broadcast.cfm" data-ajax="true" data-channel="DEMO 0#i#">BROADCAST</a></li>
-						<li><a href="/chat/" target="blank">CHAT</a></li>
-					</ul>
-				</div>
-			</div>
-			<div class="navbar navbar-default">
-				<div class="container-fluid">
-					<div class="navbar-header">
-						<span class="navbar-brand">OTHER</span>
-					</div>
-					<ul class="nav navbar-nav navbar-left">
-						<!--- <li><a href="/chat/subscribers.cfm" data-modal="true" data-channel="DEMO 0#i#">SUBSCRIBERS</a></li> --->
-						<!--- <li><a href="/chat/broadcast.cfm" data-ajax="true" data-channel="DEMO 0#i#">BROADCAST</a></li> --->
-						<li><a href="/html-to-coldfusion/" target="blank">HTML TO COLDFUSION</a></li>
-						<li><a href="http://socketio.local.com" target="blank">SOCKET IO CONSOLE</a></li>
-						<li><a href="http://socketio.local.com/broadcast.cfm" data-ajax="true" data-channel="SOCKET IO">SOCKET IO BROADCAST</a></li>
-					</ul>
-				</div>
-			</div>
 		</cfoutput>
 	</div>
 
@@ -68,17 +81,16 @@
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
+					<h5 class="modal-title"></h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title"></h4>
 				</div>
 				<div class="modal-body"></div>
 			</div>
 		</div>
 	</div>
 
-	<!-- Third Party -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
 	<script>
 		$(function(){
@@ -87,22 +99,22 @@
 			// broadcast
 			$('a[data-ajax]').on('click',function(){
 				var channel = this.dataset.channel;
-				$.ajax(this.href)
-				.done(function(response){
-					prepareNotification(`BROADCAST : ${channel}`,response);
-				});
+				fetch(this.href,headers())
+					.then( response => response.text() )
+					.then( response => prepareNotification(`BROADCAST : ${channel}`,response) );
 				return false;
 			});
 
 			// show subscribers
 			$('a[data-modal]').on('click',function(){
 				var channel = this.dataset.channel;
-				$.ajax(this.href)
-				.done(function(response){
-					mdl.modal('show')
-						.find('.modal-title').html(`${channel} : SUBSCRIBERS`).end()
-						.find('.modal-body').html(response)
-				});
+				fetch(this.href,headers())
+					.then( response => response.text() )
+					.then( response => {
+						mdl.modal('show')
+							.find('.modal-title').html(`${channel} : SUBSCRIBERS`).end()
+							.find('.modal-body').html(response)
+					} );
 				return false;
 			});
 
@@ -130,6 +142,15 @@
 				});
 				// close out notification automatically
 				setTimeout(notification.close.bind(notification),5000);
+			}
+
+			// fetch api headers
+			function headers(options) {
+				options = options || {}
+				options.headers = options.headers || {}
+				options.headers['X-Requested-With'] = 'XMLHttpRequest'
+				options.method = 'GET'
+				return options
 			}
 		});
 	</script>

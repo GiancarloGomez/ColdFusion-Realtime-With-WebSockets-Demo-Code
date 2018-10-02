@@ -249,7 +249,6 @@
                 AdvancedSocket.statusLabel.innerHTML = 'We are connected!!!';
             }
         }
-
     };
 
     // bind console log so we can get proper line numbers (new way)
