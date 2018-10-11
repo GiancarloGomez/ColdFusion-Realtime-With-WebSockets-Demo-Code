@@ -12,5 +12,8 @@ component {
 		*/
 		// request.socketio_server = "http://localhost:{{port}}";
 		// request.socketio_broadcast = "https://localhost:{{port}}/broadcast/";
+
+		request.socketio_server = "http://localhost:51095/";
+		request.socketio_broadcast = "http://localhost:51095/broadcast/";
 	}
 }
