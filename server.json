@@ -1,0 +1,12 @@
+{
+    "app":{
+        "cfengine":"adobe@2018"
+    },
+    "web":{
+        "gzipEnable":"true",
+        "rewrites":{
+            "enable":"true",
+            "config":".htaccess"
+        }
+    }
+}

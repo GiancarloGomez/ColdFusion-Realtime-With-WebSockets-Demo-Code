@@ -7,6 +7,10 @@
 	param name="url.channel" default="demo";
 	param name="url.message" default="";
 
+	// this stops an OPTIONS request from continuing to process
+	if (!compare(cgi.REQUEST_METHOD,"OPTIONS"))
+		exit;
+
 	isAjax = structKeyExists(cgi,"X-Requested-With") && !compareNoCase(cgi["X-Requested-With"],"XMLHttpRequest");
 
 	params = {

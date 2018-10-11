@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>WebSocket Demo 3 - Simple</title>
-	<link rel="stylesheet" href="../../assets/css/styles.css">
+	<link rel="stylesheet" href="/assets/css/styles.css">
 </head>
 <body>
 
@@ -20,7 +20,7 @@
 		<button type="button" id="sendmessage">Send Message</button>
 	</form>
 
-	<script src="../../assets/js/script.js"></script>
+	<script src="/assets/js/script.js"></script>
 
 	<cfwebsocket name="ws"
 				 onmessage="parseMessage"

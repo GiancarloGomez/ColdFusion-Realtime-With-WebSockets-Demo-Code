@@ -86,6 +86,6 @@ component extends="CFIDE.websocket.ChannelListener" {
 							"</li>";
 		}
 		local.str &= "</ul>";
-		WsPublish("chat",{type:"clients",data:local.str});
+		WsPublish("chat",{"type":"clients","data":local.str});
 	}
 }

@@ -1,5 +1,6 @@
 component {
 	this.name = "websockets_demo2";
+    this.serialization.preservecaseforstructkey = true;
 
 	this.wschannels = [
 		{name:"demo"}

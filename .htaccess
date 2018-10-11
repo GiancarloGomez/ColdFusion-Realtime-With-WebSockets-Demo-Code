@@ -1,7 +1,6 @@
 RewriteEngine On
 
 Header set Access-Control-Allow-Origin "*"
-Header set Access-Control-Allow-Headers "*"
 
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d

@@ -1,8 +1,8 @@
 component {
-
     this.name              = "webSocketsChat";
     this.sessionmanagement = true;
     this.sessiontimeout    = createTimeSpan(1,0,0,0);
+    this.serialization.preservecaseforstructkey = true;
 
     // websockets
     this.wschannels = [

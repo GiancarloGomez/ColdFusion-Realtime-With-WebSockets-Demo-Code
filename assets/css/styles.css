@@ -18,6 +18,20 @@ pre{
 * {
 	box-sizing: border-box;
 }
+#sig {
+	position: fixed;
+	bottom:0;
+	width: 100vw;
+	background-color: #eee;
+	border-top:1px solid #ddd;
+	padding: 1em;
+	margin:0;
+	text-align: center;
+}
+body table[class^=cfdump]{
+	font-family: 'OperatorMonoSSm-Book',Menlo,Consolas, monospace;
+	font-size:11px;
+}
 nav:not(.navbar) {
 	background-color: #f8f8f8;
 	border-bottom:1px solid #e7e7e7;

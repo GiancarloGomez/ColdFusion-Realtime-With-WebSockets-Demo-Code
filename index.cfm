@@ -49,11 +49,12 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	<title>Realtime with WebsSockets</title>
-	<link rel="icon" href="./favicon.ico">
-	<link rel="author" href="./humans.txt" />
+	<link rel="icon" href="/favicon.ico">
+	<link rel="author" href="/humans.txt" />
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-	<link rel="stylesheet" href="./assets/css/styles.css">
-	<style>body { padding:1em; }</style>
+	<link rel="stylesheet" href="/assets/css/styles.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+	<style>body { padding:1em 0 100px; }</style>
 </head>
 <body>
 	<div class="container">
@@ -76,6 +77,20 @@
 			</cfloop>
 		</cfoutput>
 	</div>
+
+	<p id="sig">
+		Giancarlo Gomez<br />
+		<a href="https://fusedevelopments.com" target="_blank">Fuse Developments</a> &bull;
+		<a href="https://crosstrackr.com" target="_blank">CrossTrackr</a>
+		<br />
+		<a href="https://github.com/GiancarloGomez" target="_blank"><i class="fab fa-github"></i></a> &nbsp;
+		<a href="https://twitter.com/GiancarloGomez" target="_blank"><i class="fab fa-twitter"></i></a> &nbsp;
+		<a href="https://www.instagram.com/GiancarloGomez" target="_blank"><i class="fab fa-instagram"></i></a> &nbsp;
+		<a href="https://www.facebook.com/giancarlo.gomez" target="_blank"><i class="fab fa-facebook"></i></a> &nbsp;
+		<a href="https://www.linkedin.com/in/giancarlogomez" target="_blank"><i class="fab fa-linkedin-in"></i></a> &nbsp;
+		<a href="https://www.giancarlogomez.com" target="_blank"><i class="fas fa-rss"></i></a> &nbsp;
+		<a href="mailto:giancarlo.gomez@gmail.com"><i class="far fa-envelope"></i></a>
+	</p>
 
 	<div class="modal fade" tabindex="-1" role="dialog" id="notification">
 		<div class="modal-dialog modal-lg" role="document">

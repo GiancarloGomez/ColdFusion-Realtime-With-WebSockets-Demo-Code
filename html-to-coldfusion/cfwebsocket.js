@@ -5,15 +5,18 @@ function cfwebsocket (
     onMessage,
     onSubscribe,
     isProxy,
-    wsPort
+    wsPort,
+    server,
+    secure
 ){
     var me = this;
 
-    this.isSecure   = location.protocol === 'https:' ? true : false;
+    this.server     = server ? server : location.hostname;
+    this.isSecure   = secure ? secure : (location.protocol === 'https:' ? true : false);
     this.protocol   = this.isSecure ? 'wss' : 'ws';
     this.port       = wsPort ? wsPort : (isProxy ? '' : (this.isSecure ? 8543 : 8577));
     this.path       = isProxy ? '/cfws/' : '/cfusion/cfusion';
-    this.server     = `${this.protocol}://${location.hostname}${this.port ? `:${this.port}` : ''}`;
+    this.server     = `${this.protocol}://${this.server}${this.port ? `:${this.port}` : ''}`;
     this.ws         = new WebSocket(`${this.server}${this.path}`);
 
     // cf json properties for sending messages
@@ -44,12 +47,13 @@ function cfwebsocket (
                 });
             }
         }
-        else if (data.code === 0 && data.type === 'response' && data.reqType === 'subscribe' && data.msg ==='ok' && onSubscribe && typeof onSubscribe === 'function'){
-            onSubscribe();
+        else if (data.code === 0 && data.type === 'response' && data.reqType === 'subscribe' && data.msg ==='ok' && onSubscribe && typeof onSubscribe === 'object'){
+            onSubscribe.subscribed();
         }
         // pass to our onMessage function we passed in
-        if (onMessage && typeof onMessage === 'function')
-            onMessage(data)
+        if (onMessage && typeof onMessage === 'object'){
+            onMessage.parseMessage(data);
+        }
     };
 
     this.ws.onerror = function(e){

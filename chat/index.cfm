@@ -6,13 +6,13 @@
 	<title>WebSocket Chat</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-	<link rel="stylesheet" href="../assets/css/chat.css">
+	<link rel="stylesheet" href="/assets/css/chat.css">
 </head>
 <body 	data-channels="chat"
-		data-debug="false"
+		data-debug="true"
 		data-auto-connect="false"
 		data-online-timer="10"
-		data-ping-url="ping.cfm"
+		data-ping-url="./ping/"
 		data-do-message="receiveMessage"
 		class="off">
 
@@ -77,8 +77,8 @@
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-	<script src="../assets/js/advancedsocket.js"></script>
-	<script src="../assets/js/chat.js"></script>
+	<script src="/assets/js/advancedsocket.js"></script>
+	<script src="/assets/js/chat.js"></script>
 
 	<cfwebsocket 	name		= "ws"
 					onMessage	= "AdvancedSocket.onMessage"

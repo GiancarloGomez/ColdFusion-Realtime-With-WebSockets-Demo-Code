@@ -5,14 +5,18 @@
 * a send() call.
 */
 var cfws = new cfwebsocket(
-    'websockets_demo1',
-    'demo',
-    'https://demo.fusedev.com/live-demos/demo-01/runme.cfm',
-    parseMessage,
-    subscribed,
-    true
+    'websockets_demo1', // appName
+    'demo', // channel
+    'http://localhost:50320/live-demos/demo-01/runme/', // appStartPath
+    parseMessage, // onMessage
+    subscribed, // onSubscribe
+    false, // isProxy
+    8581, // wsPort
+    'localhost', // server
+    false // secure
 );
-// overwrite from ../assets/js/script.js
+
+// overwrite from /assets/js/script.js
 sendMessage.removeEventListener('click',doSendMessage);
 sendMessage.addEventListener('click',publish);
 
