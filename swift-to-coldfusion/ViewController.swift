@@ -17,18 +17,18 @@ final class ViewController: UIViewController{
     @IBOutlet weak var message: UILabel!
     @IBOutlet weak var messageBox: UITextField!
     @IBOutlet weak var sendButton: UIButton!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        var request = URLRequest(url: URL(string: "wss://demo.fusedev.com/cfws/")!)
+        var request = URLRequest(url: URL(string: "ws://localhost:8581/cfusion/cfusion")!)
         request.timeoutInterval = 5
         socket = WebSocket(request: request)
         socket.delegate = self
         socket.connect()
     }
-    
+
     // MARK: Write Text Action
-    
+
     @IBAction func write(_ sender: UIButton) {
         if (messageBox.text != ""){
             let message = "{\"ns\":\"coldfusion.websocket.channels\",\"type\":\"publish\",\"channel\":\"demo\",\"appName\":\"websockets_demo1\",\"data\":\"\(messageBox.text ?? "")\"}";
@@ -36,20 +36,20 @@ final class ViewController: UIViewController{
             messageBox.text = ""
         }
     }
-    
+
 }
 
 // MARK: - WebSocketDelegate
 extension ViewController : WebSocketDelegate {
-    
+
     func sendMessage(message: String){
         socket.write(string: message)
     }
-    
+
     func websocketDidConnect(socket: WebSocketClient) {
         sendMessage(message: _subscribe)
     }
-    
+
     func websocketDidDisconnect(socket: WebSocketClient, error: Error?) {
         if let e = error as? WSError {
             print("websocket is disconnected: \(e.message)")
@@ -60,7 +60,7 @@ extension ViewController : WebSocketDelegate {
         }
         message.text = "WebSocket Server Disconnected"
     }
-    
+
     func websocketDidReceiveMessage(socket: WebSocketClient, text: String) {
         // let try and parse received JSON
         guard let data = text.data(using: .utf16),
@@ -84,7 +84,7 @@ extension ViewController : WebSocketDelegate {
         // log the full response
         print(text);
     }
-    
+
     func websocketDidReceiveData(socket: WebSocketClient, data: Data) {
         print("Received data: \(data.count)")
     }
