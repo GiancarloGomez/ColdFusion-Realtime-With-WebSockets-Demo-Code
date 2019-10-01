@@ -7,13 +7,14 @@
 var cfws = new cfwebsocket(
     'websockets_demo1', // appName
     'demo', // channel
-    'http://localhost:50320/live-demos/demo-01/runme/', // appStartPath
+    'http://127.0.0.1:50320/live-demos/demo-01/runme/', // appStartPath
     parseMessage, // onMessage
     subscribed, // onSubscribe
     false, // isProxy
     8581, // wsPort
-    'localhost', // server
-    false // secure
+    '127.0.0.1', // server
+    false, // secure,
+    {device:'Mobile'} // customOptions
 );
 
 // overwrite from /assets/js/script.js

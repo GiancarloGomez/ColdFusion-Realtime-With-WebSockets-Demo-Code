@@ -26,7 +26,6 @@ function cfwebsocket (
 
     // WebSocket API Events
     this.ws.onopen = function(e){
-        // console.log('onopen',e);
         me.subscribeMe();
     };
 

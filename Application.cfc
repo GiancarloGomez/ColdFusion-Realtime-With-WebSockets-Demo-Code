@@ -14,5 +14,7 @@ component {
 		// request.socketio_broadcast = "https://localhost:{{port}}/broadcast/";
 		cfheader(name:"Access-Control-Allow-Origin",value:"*");
 		cfheader(name:"Access-Control-Allow-Headers",value:"*");
+		request.socketio_server = "http://localhost:51095/";
+		request.socketio_broadcast = "http://localhost:51095/broadcast/";
 	}
 }
