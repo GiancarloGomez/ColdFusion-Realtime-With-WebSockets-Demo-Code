@@ -26,6 +26,27 @@ You can easily run the demos using CommandBox. Simply clone this repo to your lo
 and execute the ``box start`` command at the ``root`` folder for the main app and in the ``other-demo-files\socket.io_site``
 folder for the demo of using Socket.IO instead of ColdFusion's WebSockets.
 
+__The default server.json is set to use ColdFusion 2021. If you use this one make sure
+to install the websocket package using cfpm and/or thru the administrator. If you choose to
+do it from the CLI simply type the following while in CommandBox and/or the Server's bin folder__
+
+```bash
+cfpm install websocket
+```
+
+> Lucee server is not supported for these examples. If using Lucee, I recommend looking at the socket.io example
+or using an existing service for WebSocket communication.
+
+If you want to run other version's other than 2021 you can do so by starting the server as follows:
+```bash
+# ColdFusion 2018
+box server start serverConfigFile=server.2018.json 
+# ColdFusion 2016
+box server start serverConfigFile=server.2016.json 
+# ColdFusion 11 ( make sure to point to supported JDK if system version not supported )
+box server start serverConfigFile=server.11.json 
+```
+
 __Application.cfc Settings__
 To run this code you must set 2 request variables in ``Application.cfc``, these variables are for the site ran from ``other-demo-files\socket.io_site``
 

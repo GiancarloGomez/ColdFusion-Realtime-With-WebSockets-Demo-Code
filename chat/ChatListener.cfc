@@ -18,6 +18,12 @@ component extends="CFIDE.websocket.ChannelListener" {
 		return arguments.publisherInfo.connectionInfo.authenticated;
 	}
 
+	/**
+	 * Transforms the message into a struct that is used by beforeSendMessage
+	 * The struct containst the publisher's connection info and a to parameter
+	 * sent by the publisher when sending a private message
+	 * ( review /assets/chat.js to see how it is done )
+	 */
 	public any function beforePublish( any message, struct publisherInfo ){
 		cflock( scope="application", timeout="10", type="exclusive" ){
 			application.publishedMessages++;
