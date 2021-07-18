@@ -5,79 +5,83 @@
 	<link rel="icon" href="/favicon.png">
 	<title>WebSocket Chat</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" integrity="sha256-djO3wMl9GeaC/u6K+ic4Uj/LKhRUSlUFcsruzS7v5ms=" crossorigin="anonymous">
 	<link rel="stylesheet" href="/assets/css/chat.css">
 </head>
 <body 	data-channels="chat"
-		data-debug="true"
+		data-debug="false"
 		data-auto-connect="false"
 		data-online-timer="10"
 		data-ping-url="./ping/"
 		data-do-message="receiveMessage"
-		class="off">
+		class="d-flex flex-column off">
 
-	<!-- TOP BAR : ACTIONS -->
-	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<!-- TOP BAR -->
+	<nav class="navbar navbar-light bg-light">
 		<div class="container-fluid">
-			<div class="navbar-header">
+			<div>
 				<span class="navbar-brand">Chat App</span>
 			</div>
-			<ul class="nav navbar-nav pull-right">
-				<li><a href="#" id="clearlog">Clear Messages</a></li>
-				<li><a href="#" id="leave-room" class="hide">Leave Room</a></li>
-			</ul>
+			<div>
+				<a href="#" id="clear-messages" class="btn btn-sm btn-secondary">Clear Messages</a></li>
+				<a href="#" id="leave-room" class="btn btn-sm btn-danger">Leave Room</a></li>
+			</div>
 		</div>
 	</nav>
 
-	<!-- BOTTOM BAR : STATUS NOTIFICATIONS -->
-	<div class="navbar navbar-default navbar-fixed-bottom">
-		<div id="status-message" class="hide"></div>
-	</div>
+	<!-- CHAT USERS AND MESSAGES -->
+	<main class="d-flex">
+		<!-- USERS LIST -->
+		<div id="users" class="bg-light"></div>
+		<!-- MESSAGES -->
+		<div id="messages" class="flex-grow-1"></div>
+	</main>
 
 	<!-- MESSAGE FORM -->
-	<div class="navbar navbar-default navbar-fixed-bottom" id="chat-message-form">
+	<div id="chat-message-form" class="bg-light">
 		<form id="messageFrm">
-		<div class="input-group">
-			<input type="text" class="form-control" id="message">
-			<span class="input-group-btn">
+			<div class="mb-2">
+				<div class="input-group">
+					<span class="input-group-text">To:</span>
+					<select id="message-to" class="form-select"></select>
+				</div>
+			</div>
+			<div class="input-group">
+				<input type="text" class="form-control" id="message">
 				<button class="btn btn-success" type="submit" id="send-message">Send</button>
-			</span>
-		</div>
+			</div>
 		</form>
 	</div>
 
-	<!-- USERS LIST -->
-	<div id="users"></div>
-
-	<!-- MESSAGES -->
-	<ul id="console" class="list-unstyled"></ul>
+	<!--  STATUS NOTIFICATIONS -->
+	<div id="status-message">
+		We are good
+	</div>
 
 	<!-- LOGIN MODAL -->
 	<div class="modal fade" id="login">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h4 class="modal-title">Chat Login</h4>
+					<h5 class="modal-title text-center">Chat Login</h4>
 				</div>
 				<div class="modal-body">
 					<form id="loginFrm">
-					<div class="form-group">
-						<label class="control-label" for="username">Name</label>
-						<input type="username" class="form-control" id="username" placeholder="Enter your name">
-						<span class="help-block"></span>
-					</div>
-					<div class="form-group" style="margin:0;">
-						<button type="submit" class="btn btn-primary">Login</button>
-					</div>
+						<div class="input-group has-validation">
+							<input type="username" class="form-control" id="username" placeholder="Please enter your name">
+							<button type="submit" class="btn btn-primary">Login</button>
+							<div class="invalid-feedback"></div>
+						</div>
 					</form>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-	<script src="/assets/js/advancedsocket.js"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha256-XDbijJp72GS2c+Ij234ZNJIyJ1Nv+9+HH1i28JuayMk=" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/advancedsocket@latest/dist/advancedsocket.min.js" integrity="sha256-BL/dJfKkEsGPihoT3izThE3BhTgQg4SER+mq7HwAiKE=" crossorigin="anonymous"></script>
 	<script src="/assets/js/chat.js"></script>
 
 	<cfwebsocket 	name		= "ws"

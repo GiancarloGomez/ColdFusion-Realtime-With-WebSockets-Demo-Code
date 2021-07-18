@@ -28,7 +28,7 @@ component {
 
     public boolean function onWSAuthenticate(string username, string password, struct connectionInfo) {
         // Demo User Authentication - very simple here you would do real work
-        var usersAllowed    = ["JC","Maria","Mailang","Jonah","Gia"];
+        var usersAllowed    = ["Admin","JC","Maria","Mailang","Jonah","Gia"];
         var authenticated   = arrayFindNoCase(usersAllowed,arguments.username);
         if (authenticated){
             arguments.connectionInfo.authenticated = true;

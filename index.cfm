@@ -62,7 +62,7 @@
 		<cfoutput>
 			<cfloop array="#links#" item="link" index="i">
 				<nav class="navbar navbar-light bg-light navbar-expand-md">
-					<a class="navbar-brand" href="##">#link.title# <small class="text-info">#link.description#</small></a>
+					<span class="navbar-brand" href="##">#link.title# <small class="text-info">#link.description#</small></span>
 					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="##demo_controls_#i#" aria-controls="##demo_controls_#i#" aria-expanded="false" aria-label="Toggle navigation">
 						<span class="navbar-toggler-icon"></span>
 					</button>

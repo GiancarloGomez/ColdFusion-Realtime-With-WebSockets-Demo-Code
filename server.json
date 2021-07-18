@@ -1,11 +1,12 @@
 {
+    "name":"realtime-ws-demo-code",
+    "trayicon":"favicon.png",
     "app":{
-        "cfengine":"adobe@2018"
+        "cfengine":"adobe@2021"
     },
     "web":{
-        "gzipEnable":"true",
         "rewrites":{
-            "enable":"true",
+            "enable":true,
             "config":".htaccess"
         }
     }
