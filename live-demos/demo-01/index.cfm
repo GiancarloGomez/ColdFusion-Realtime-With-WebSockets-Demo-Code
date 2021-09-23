@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>WebSocket Demo 1</title>
-	<link rel="stylesheet" href="/assets/css/styles.css">
+	<title>WebSocket Demo - Simple</title>
+	<link rel="stylesheet" href="../assets/css/styles.css">
 </head>
 <body>
 
 	<nav>
-		<span>DEMO 01</span>
+		<span>DEMO - SIMPLE</span>
 		<button type="button" id="domessage">MESSAGE</button>
 		<button type="button" id="clearlog">CLEAR LOG</button>
 	</nav>
@@ -20,7 +20,7 @@
 		<button type="button" id="sendmessage">Send Message</button>
 	</form>
 
-	<script src="/assets/js/script.js"></script>
+	<script src="../assets/js/script.js"></script>
 
 	<cfwebsocket name="ws"
 				 onmessage="parseMessage"

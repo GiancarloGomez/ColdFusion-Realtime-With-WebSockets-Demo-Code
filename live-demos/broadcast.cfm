@@ -14,6 +14,7 @@
 	}
 	// remove HTML entities from string because it bombs out
 	msg = msg.replaceAll("\&[^\;]+\;","");
+	msg = replace(msg,"&quot;","'","all");
 	// Specially helpful when using Frameworks or calling in the middle of an Ajax Request
 	cfthread(action:"run",name:threadName,message:msg){
 		WsPublish("demo",attributes.message);

@@ -2,7 +2,7 @@
     "name":"realtime-ws-demo-code-@2016",
     "trayicon":"favicon.png",
     "app":{
-        "cfengine":"adobe@2016"
+        "cfengine":"adobe@2016.0.17+325979"
     },
     "jvm":{
         "heapSize":512,

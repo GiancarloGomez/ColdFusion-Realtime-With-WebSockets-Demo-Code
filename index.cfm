@@ -5,24 +5,27 @@
 		throw("You must set the full URL to the Socket.IO Broadcast Handler to request.socketio_broadcast - review instructions in Application.onRequestStart()");
 	links = [
 		{
-			title 		: "DEMO 1",
-			description : "SIMPLE",
+			title 		: "DEMOS",
+			description : "",
 			nav 		: [
-				{link:"/live-demos/demo-01/",title:"Console"},
-				{link:"/live-demos/demo-01/broadcast/",title:"Broadcast",ajax:true},
-				{link:"/live-demos/demo-01/subscribers/",title:"Subscribers",modal:true}
+				{link:"/live-demos/demo-00/",title:"Simple"},
+				{link:"/live-demos/demo-00/restricted/",title:"Restricted"},
+				{link:"/live-demos/demo-01/",title:"Simple Console"},
+				{link:"/live-demos/demo-01/advanced/",title:"Advanced Console"},
+				{link:"/live-demos/broadcast/",title:"Broadcast",ajax:true},
+				{link:"/live-demos/subscribers/",title:"Subscribers",modal:true}
 			]
 		},
-		{
-			title 		: "DEMO 2",
-			description : "ADVANCED",
-			nav 		: [
-				{link:"/live-demos/demo-02/",title:"Simple Console"},
-				{link:"/live-demos/demo-02/advanced/",title:"Advanced Console"},
-				{link:"/live-demos/demo-02/broadcast/",title:"Broadcast",ajax:true},
-				{link:"/live-demos/demo-02/subscribers/",title:"Subscribers",modal:true}
-			]
-		},
+		// {
+		// 	title 		: "DEMO 2",
+		// 	description : "ADVANCED",
+		// 	nav 		: [
+		// 		{link:"/live-demos/demo-02/",title:"Simple Console"},
+		// 		{link:"/live-demos/demo-02/advanced/",title:"Advanced Console"},
+		// 		{link:"/live-demos/demo-02/broadcast/",title:"Broadcast",ajax:true},
+		// 		{link:"/live-demos/demo-02/subscribers/",title:"Subscribers",modal:true}
+		// 	]
+		// },
 		{
 			title 		: "CHAT",
 			description : "",
@@ -31,16 +34,16 @@
 				{link:"/chat/broadcast/",title:"Broadcast",ajax:true},
 				{link:"/chat/subscribers/",title:"Subscribers",modal:true}
 			]
-		},
-		{
-			title 		: "OTHER",
-			description : "",
-			nav 		: [
-				{link:"/html-to-coldfusion/",title:"HTML to ColdFusion"},
-				{link:request.socketio_server,title:"Socket.IO Console"},
-				{link:request.socketio_broadcast,title:"Socket.IO Broadcast",ajax:true}
-			]
 		}
+		// {
+		// 	title 		: "OTHER",
+		// 	description : "",
+		// 	nav 		: [
+		// 		{link:"/html-to-coldfusion/",title:"HTML to ColdFusion"},
+		// 		{link:request.socketio_server,title:"Socket.IO Console"},
+		// 		{link:request.socketio_broadcast,title:"Socket.IO Broadcast",ajax:true}
+		// 	]
+		// }
 	];
 </cfscript>
 <!DOCTYPE html>
@@ -48,17 +51,17 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-	<title>Realtime with WebsSockets</title>
+	<title>WebSockets 201</title>
 	<link rel="icon" href="/favicon.ico">
 	<link rel="author" href="/humans.txt" />
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-	<link rel="stylesheet" href="/assets/css/styles.css">
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+	<link rel="stylesheet" href="/live-demos/assets/css/styles.css">
 	<style>body { padding:1em 0 100px; }</style>
 </head>
 <body>
 	<div class="container">
-		<h1 class="text-center">Realtime with WebSockets</h1>
+		<h1 class="text-center">WebSockets 201</h1>
 		<cfoutput>
 			<cfloop array="#links#" item="link" index="i">
 				<nav class="navbar navbar-light bg-light navbar-expand-md">

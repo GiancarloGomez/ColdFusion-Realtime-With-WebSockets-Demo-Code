@@ -6,7 +6,7 @@
 	<title>WebSocket Chat</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" integrity="sha256-djO3wMl9GeaC/u6K+ic4Uj/LKhRUSlUFcsruzS7v5ms=" crossorigin="anonymous">
-	<link rel="stylesheet" href="/assets/css/chat.css">
+	<link rel="stylesheet" href="./assets/chat.css">
 </head>
 <body 	data-channels="chat"
 		data-debug="false"
@@ -82,7 +82,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha256-XDbijJp72GS2c+Ij234ZNJIyJ1Nv+9+HH1i28JuayMk=" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/advancedsocket@latest/dist/advancedsocket.min.js" integrity="sha256-BL/dJfKkEsGPihoT3izThE3BhTgQg4SER+mq7HwAiKE=" crossorigin="anonymous"></script>
-	<script src="/assets/js/chat.js"></script>
+	<script src="./assets/chat.js"></script>
 
 	<cfwebsocket 	name		= "ws"
 					onMessage	= "AdvancedSocket.onMessage"

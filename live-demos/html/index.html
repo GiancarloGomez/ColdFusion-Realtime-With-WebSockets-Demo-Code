@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>HTML Test</title>
+</head>
+<body>
+	<script src="cfwebsocket.js"></script>
+	<script>
+		const cfws = new CFWebSocket(
+			'websockets_2021_demo', // appName
+			'127.0.0.1', 			// server
+			false, 					// isProxy
+			8581, 					// wsPort
+			'/live-demos/ping/', 	// appStartPath
+			'demo', 				// channel
+			{ type:'HTML_CLIENT' }, // customOptions
+			doMessage, 				// onMessage
+			subscribed, 			// onSubscribe
+		);
+
+		function doMessage( message ){
+			console.log( message );
+		}
+
+		function subscribed( data ){
+			console.log( "subscribed", data );
+		}
+	</script>
+</body>
+</html>
