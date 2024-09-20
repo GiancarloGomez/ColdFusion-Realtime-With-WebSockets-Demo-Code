@@ -1,85 +1,114 @@
-var app         = require('express')(),
-    server      = require('http').Server(app),
-    io          = require('socket.io')(server),
-    bodyParser  = require('body-parser'),
-    url         = require('url');
+import express from 'express';
+import { createServer } from 'node:http';
+import { fileURLToPath } from 'node:url';
+import { dirname, join } from 'node:path';
+import { Server } from 'socket.io';
 
-// listen on custom port
-server.listen(8080, function(){
-  console.log('listening on *:8080');
-});
+const app = express();
+const server = createServer(app);
+const io = new Server(server);
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+app.use( express.static('public') );
+app.use( '/publish', express.json() );
 
 // The Simple WebSocket Server
-io.on('connection', function (socket) {
-    // parse the url and retrieve the channels value
-    var query       = url.parse(socket.handshake.url, true).query,
-        channels    = query.channels ? query.channels.toString().split(',') : [];
+io.on('connection', socket => {
+
+    const channels = socket.handshake.query.channels ?
+                        socket.handshake.query.channels.toString().split(',') :
+                        [];
+
+    console.log( `user connected - ${socket.id}`, channels );
+
+    const subscribeTo = channels => {
+        channels.forEach( channel => {
+            socket.join( channel );
+            console.log( `subscribing ${socket.id} to channel ${channel}`);
+        });
+    }
+
+    const unsubscribeFrom = channels => {
+        channels.forEach( channel => {
+            socket.leave( channel );
+            console.log( `unsubscribing ${socket.id} from channel ${channel}`);
+        });
+    }
 
     // join each channel passed (room)
-    for (var channel in channels){
-        socket.join(channels[channel])
-        // connecting to channel
-        console.log('connecting to channel ' + channels[channel]);
-    }
+    subscribeTo( channels );
 
-    // when the client emits a 'message'
-    socket.on('message',function(data){
-        console.log('message : ',data);
+    socket.on('disconnect', () => {
+        console.log( `user disconnected - ${socket.id}` );
+    });
+
+    socket.on('subscribe', channels => {
+        channels = channels ? channels.toString().split(',') : [];
+        subscribeTo( channels );
+    });
+
+    socket.on('unsubscribe', channels => {
+        channels = channels ? channels.toString().split(',') : [];
+        unsubscribeFrom( channels );
+    });
+
+    socket.on('publish', data => {
+        console.log( 'publish ', data );
+
+        if ( data.constructor !== Object ) {
+            data = {
+                message : data
+            };
+        }
+
+        // send back the publisherId
+        data.publisherId = socket.id;
+
         // emit the message to the other subscribers
-        if (data.channel)
-            socket.broadcast.to(data.channel).emit('message',data);
+        // use socket.broadcast to send to all except the sender
+        if ( data.channel )
+            io.to( data.channel ).emit( 'message', data );
         else
-            socket.broadcast.emit('message',data);
-    });
-
-    // when a client disconnects
-    socket.on('disconnect', function(){
-        console.log('disconnect');
+            io.emit( 'message', data );
     });
 });
 
-/*
-* https://github.com/expressjs/body-parser
-* Node.js body parsing middleware
-* the bodyParser object exposes various factories to create middlewares.
-* All middlewares will populate the req.body property with the parsed body,
-* or an empty object ({}) if there was no body to parse (or an error was returned).
-*/
-app.use(bodyParser.urlencoded({extended:true}));
+// publish via post
+app.post('/publish', ( req, res ) => {
+    console.log( `[200]  ${req.method} ${req.url} via ${req.get('user-agent')} ${req.get('host')} ${req.ip}`);
 
-// HOME PAGE
-app.get('/', function(req, res){
-  res.send('<h1>Hello world</h1>');
-});
+    try {
+        if ( !req.body.message ) {
+            return res.status(400).json({'error':'message is required'});
+        }
 
-// POST MESSAGE
-// Easy way to post a message so connected clients can receive from external services
-app.post('/publish',function(req, res){
+        req.body.publisherId = 0;
 
-    var message;
-
-    console.log("[200] " + req.method + " to " + req.url + " from " + req.get('user-agent') + ' ' + req.get('host') + ' ' + req.ip);
-    console.log(req.body);
-
-    // try to parse the message first or send as simple string
-    try{
-        message = JSON.parse(req.body.message);
-    }
-    catch(e) {
-        message = req.body.message;
-    }
-    // append channel to object
-    if(typeof message === 'object' && req.body.channel && !message.channel);
-        message.channel = req.body.channel;
-    try{
         // if post to channel or global
-        if (req.body.channel)
-            io.sockets.to(req.body.channel).emit('message',message);
+        if ( req.body.channel )
+            io.to( req.body.channel ).emit( 'message', req.body );
         else
-            io.sockets.emit('message',{message:message});
-        res.json({'success':true});
+            io.emit( 'message',req.body );
+
+        res.json( { 'success':true } );
     }
     catch(e){
-        res.json({'success':false});
+        res.json( { 'success':false } );
     }
+});
+
+// get channel subscriber count and meta
+app.get('/subscribers/:channel', async ( req, res ) => {
+    const sockets = ( await io.in( req.params.channel ).fetchSockets() ).map( socket => {
+        return {
+            id : socket.id ,
+            date : socket.handshake.time
+        };
+    });
+    res.json( { 'success':true, 'count':sockets.length, sockets } );
+});
+
+server.listen( 3000, () => {
+    console.log('server running at http://localhost:3000');
 });

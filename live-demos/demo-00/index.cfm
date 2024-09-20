@@ -9,8 +9,12 @@
 </head>
 <body>
 	<cfoutput>
-		<h1>#application.applicationname# <small>Simple</small></h1>
+		<div class="d-flex justify-content-center align-items-center flex-column vh-100 text-center">
+			<strong>#application.applicationname#</strong>
+			<small>Simple Example<br />Everything is in the console</small>
+		</div>
 	</cfoutput>
+
 	<cfwebsocket name="ws"
 					onMessage="onMessage"
 					onOpen="onOpen"

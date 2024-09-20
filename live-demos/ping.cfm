@@ -1,7 +1,7 @@
 <cfscript>
 	param name="url.id" default="";
 	// get all clients
-	clients = WSgetSubscribers("demo");
+	clients = wsGetSubscribers("demo");
 	match 	= false;
 	// go thru each until a match is found
 	for (rec in clients){

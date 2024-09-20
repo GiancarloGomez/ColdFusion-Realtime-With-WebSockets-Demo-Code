@@ -5,28 +5,42 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>HTML Test</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" integrity="sha256-sAcc18zvMnaJZrNT4v8J0T4HqzEUiUTlVFgDIywjQek=" crossorigin="anonymous">
 </head>
 <body>
+	<div class="d-flex justify-content-center align-items-center flex-column vh-100 text-center">
+		<strong>HTML Example</strong>
+		<small>Nothing to see here<br />Everything is in the console</small>
+	</div>
 	<script src="cfwebsocket.js"></script>
 	<script>
-		const cfws = new CFWebSocket(
-			'websockets_2021_demo', // appName
-			'127.0.0.1', 			// server
-			false, 					// isProxy
-			8581, 					// wsPort
-			'/live-demos/ping/', 	// appStartPath
-			'demo', 				// channel
-			{ type:'HTML_CLIENT' }, // customOptions
-			doMessage, 				// onMessage
-			subscribed, 			// onSubscribe
-		);
+		const cfws = new CFWebSocket({
+			appName 		: 'websockets_2021_demo',
+			isProxy 		: false,
+			appStartUrl 	: '127.0.0.1:63536/live-demos/ping/',
+			wsUrl 			: '127.0.0.1:8583',
+			channel 		: 'demo',
+			subscriberInfo 	: { type:'HTML_CLIENT' },
+			onMessage 		: doMessageReceived,
+			onSubscribe 	: doSubscribed,
+			onError 		: doError,
+			onClose 		: doClosed
+		});
 
-		function doMessage( message ){
-			console.log( message );
+		function doMessageReceived( message ){
+			console.log( 'doMessageReceived', { message } );
 		}
 
-		function subscribed( data ){
-			console.log( "subscribed", data );
+		function doSubscribed( data ){
+			console.log( "doSubscribed", { data } );
+		}
+
+		function doError( data ){
+			console.log( "doError", { data } );
+		}
+
+		function doClosed( data ){
+			console.log( "doClosed", { data } );
 		}
 	</script>
 </body>

@@ -1,0 +1,23 @@
+
+.btn:focus-visible,
+.form-control:focus{
+    box-shadow: none;
+}
+.form-control:focus{
+    border-color: var(--bs-border-color);
+}
+section {
+    height: calc( 100vh - 3.5625rem ) ;
+    ul {
+        flex-grow: 1;
+
+        li { padding : 1rem; }
+        li:nth-child(odd) { background: #efefef; }
+    }
+}
+pre {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 300;
+    line-height: 1.42;
+    margin: 0;
+}

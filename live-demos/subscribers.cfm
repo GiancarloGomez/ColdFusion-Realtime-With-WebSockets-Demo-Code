@@ -1,15 +1,15 @@
 <cfscript>
-	topLevelChannels = WSGetAllChannels();
+	topLevelChannels = wsGetAllChannels();
 
 	for (channel in topLevelChannels){
 
-		subChannels = WSGetAllChannels(channel);
+		subChannels = wsGetAllChannels(channel);
 
 		if (subChannels.len()){
 			for (subChannel in subChannels)
-				writeDump(label:subChannel,var:WSGetSubscribers(subChannel))
+				writeDump(label:subChannel,var:wsGetSubscribers(subChannel))
 		} else {
-			writeDump(label:channel,var:WSGetSubscribers(channel));
+			writeDump(label:channel,var:wsGetSubscribers(channel));
 		}
 	}
 </cfscript>

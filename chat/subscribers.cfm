@@ -1,3 +1,3 @@
 <cfscript>
-	writeDump(WSgetSubscribers("chat"));
+	writeDump(wsGetSubscribers("chat"));
 </cfscript>

@@ -6,7 +6,7 @@ body, button, textarea {
 	font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 pre{
-	font: 400 14px/1.4em 'Operator Mono Ssm', Menlo, Consolas, monospace;
+	font: 400 1rem/1.42 'JetBrains Mono','Operator Mono Ssm', Menlo, Consolas, monospace;
 	border-radius: 0;
 	background-color: transparent;
 	margin:0;
@@ -29,8 +29,9 @@ pre{
 	text-align: center;
 }
 body table[class^=cfdump]{
-	font-family: 'OperatorMonoSSm-Book',Menlo,Consolas, monospace;
-	font-size:11px;
+	font-family: 'JetBrains Mono','Operator Mono Ssm',Menlo,Consolas, monospace;
+	font-size: .875rem;
+	line-height: 1.42;
 }
 nav:not(.navbar) {
 	background-color: #f8f8f8;

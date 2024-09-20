@@ -1,11 +1,11 @@
 {
     "app":{
-        "cfengine":"adobe@2018"
+        "cfengine":"lucee"
     },
     "web":{
-        "gzipEnable":"true",
+        "gzipEnable":true,
         "rewrites":{
-            "enable":"true",
+            "enable":true,
             "config":".htaccess"
         }
     }

@@ -1,8 +1,10 @@
 {
-    "name":"realtime-ws-demo-code-@2018",
+    "name":"realtime-ws-demo-code-@2023",
+    "trayEnable":true,
     "trayicon":"favicon.png",
+    "dockEnable":false,
     "app":{
-        "cfengine":"adobe@2018.0.19+330149"
+        "cfengine":"adobe@2023.0.10+330680"
     },
     "jvm":{
         "heapSize":512,

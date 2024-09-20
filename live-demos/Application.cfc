@@ -12,7 +12,7 @@ component {
 
 	public void function onRequestStart() {
 		if (structKeyExists(url, "reload")){
-			WsPublish("demo","FORCE-RECONNECT");
+			wsPublish("demo","FORCE-RECONNECT");
 			applicationStop();
 			location(cgi.script_name,false);
 		}
